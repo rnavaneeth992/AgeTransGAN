@@ -39,9 +39,9 @@ def main(args):
     print('Generate Video')
     make_video(save_name, args.group)
     print('Done')
-    print('------------------')
-    print('Press q to quit')
-    play_video(save_name)
+    # print('------------------')
+    # print('Press q to quit')
+    # play_video(save_name)
 
 
 if __name__ == '__main__':
