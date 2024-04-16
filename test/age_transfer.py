@@ -57,7 +57,7 @@ class Model():
                 generated = self.G_model(mini_img, mini_age_code)
                 for j in range(len(mini_img)):
                     utils.save_image(generated[0][j],
-                    'result/{}/{}.png'.format(group, str(count).zfill(3)), nrow=1, normalize=True, range=(-1, 1))
+                    'result/{}/{}.png'.format(group, str(count).zfill(3)), nrow=1, normalize=True, value_range=(-1, 1))
                     print("\rProcessing {:.2f}%".format(100*count/total), end="", flush=True)
                     count += 1
 
