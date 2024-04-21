@@ -82,7 +82,9 @@ def main():
                 img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
                 plt.imshow(img_rgb)
                 plt.title(f"Filename: {filename}, Prediction: {pred}")
-                plt.show()
+                display(plt.gcf())  # Display the current figure
+                clear_output(wait=True)  # Clear the output to make room for the next image
+                plt.clf()  # Clear the current figure's data
 
 if __name__ == "__main__":
     main()
