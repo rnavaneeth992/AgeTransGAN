@@ -23,6 +23,8 @@ LAMBDA_2 = 0.05
 START_AGE = 0
 END_AGE = 100
 VALIDATION_RATE= 0.1
+# Load the face detection model (Haar Cascade)
+face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
 
 def predict(model, image):
 
@@ -69,13 +71,30 @@ def main():
         model.cuda()
         with open(args.outcsv+'.csv', 'a+', newline='') as csvfile:
             for filename in os.listdir(args.pred_path):
-                img = cv2.imread(args.pred_path+"/"+filename)
-                resized_img = cv2.resize(img, (224, 224))
-                pred = predict(model, resized_img) 
-                writer =  csv.writer(csvfile)
-                writer.writerow([filename,pred])
-                all_age+= pred
-                all_num+=1
+                img_path = os.path.join(args.pred_path, filename)
+                img = cv2.imread(img_path)
+                
+                # Detect faces in the image
+                faces = face_cascade.detectMultiScale(img, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))
+                
+                if len(faces) > 0:
+                    # Assume the largest detected face is the desired one
+                    x, y, w, h = max(faces, key=lambda rect: rect[2] * rect[3])
+                    
+                    # Crop the face from the image
+                    face_img = img[y:y+h, x:x+w]
+                    
+                    # Resize the cropped face image
+                    resized_img = cv2.resize(face_img, (224, 224))
+                    
+                    # Make a prediction
+                    pred = predict(model, resized_img)
+                    
+                    # Write the results to the CSV file
+                    writer.writerow([filename, pred])
+                else:
+                    # Handle the case where no face is detected
+                    writer.writerow([filename, "No face detected"])
 
 if __name__ == "__main__":
     main()
