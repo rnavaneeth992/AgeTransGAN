@@ -76,6 +76,8 @@ def main():
                 writer.writerow([filename,pred])
                 all_age+= pred
                 all_num+=1
+                print(f"Filename: {filename}, Prediction: {pred}")
+                cv2.imshow('Image', img)
 
 if __name__ == "__main__":
     main()
