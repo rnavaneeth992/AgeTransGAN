@@ -18,6 +18,7 @@ from model.resnet50_ft_dims_2048 import resnet50_ft
 import cv2
 import torch.nn.functional as F
 import csv
+import matplotlib.pyplot as plt
 LAMBDA_1 = 0.2
 LAMBDA_2 = 0.05
 START_AGE = 0
@@ -75,9 +76,11 @@ def main():
                 writer =  csv.writer(csvfile)
                 writer.writerow([filename,pred])
                 all_age+= pred
-                all_num+=1
-                print(f"Filename: {filename}, Prediction: {pred}")
-                cv2.imshow('Image', img)
+                all_num += 1
+                img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+                plt.imshow(img_rgb)
+                plt.title(f"Filename: {filename}, Prediction: {pred}")
+                plt.show()
 
 if __name__ == "__main__":
     main()
