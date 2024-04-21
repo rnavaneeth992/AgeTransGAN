@@ -18,6 +18,8 @@ from model.resnet50_ft_dims_2048 import resnet50_ft
 import cv2
 import torch.nn.functional as F
 import csv
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 LAMBDA_1 = 0.2
 LAMBDA_2 = 0.05
