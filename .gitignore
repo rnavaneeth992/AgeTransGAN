@@ -1,2 +1,3 @@
 
 ffhq_10group_910k.pt
+age_estimator/weights/mean_variance_ffhq/age_estimator.pth
