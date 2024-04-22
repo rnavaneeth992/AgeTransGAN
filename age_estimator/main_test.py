@@ -50,10 +50,12 @@ def main():
 
     print(f"Predicted Age: {pred_age}")
 
-    # Optionally display the image
+    # Display the image with prediction
     img_rgb = cv2.cvtColor(resized_img, cv2.COLOR_BGR2RGB)
+    plt.figure(figsize=(8, 6))  # You can adjust the figure size as needed
     plt.imshow(img_rgb)
     plt.title(f"Prediction: {pred_age}")
+    plt.axis('off')  # Hide the axis
     plt.show()
 
 if __name__ == "__main__":
