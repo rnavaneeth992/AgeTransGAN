@@ -24,10 +24,7 @@ def main(args):
                                     transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5), inplace=True)])
     save_name = datetime.now().strftime('%Y%m%d-%H-%M-%S')
     capture_img = img
-    print('Landmark detection')
     lm = LMP.detector(capture_img)
-    print('Done')
-    print('------------------')
     cropped = IMP.crop(capture_img, lm)
     cv2.imwrite('crop/{}.png'.format(save_name), cropped)
     cropped = Image.fromarray(cv2.cvtColor(cropped, cv2.COLOR_BGR2RGB))
